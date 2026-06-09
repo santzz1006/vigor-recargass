@@ -190,6 +190,20 @@
             <button class="uiverse-button back-button" type="button" id="backToDetails">Voltar</button>
           </div>
 
+          <div class="checkout-method-selector" style="margin-bottom: 20px;">
+            <p class="eyebrow" style="margin-bottom: 10px;">Método de pagamento</p>
+            <div style="display: flex; gap: 15px;">
+              <label class="check-row" style="cursor: pointer; flex: 1; border: 1px solid var(--border-color); padding: 15px; border-radius: 12px;">
+                <input type="radio" name="paymentMethod" value="pix" checked />
+                <span>Pix (Aprovação na hora)</span>
+              </label>
+              <label class="check-row" style="cursor: pointer; flex: 1; border: 1px solid var(--border-color); padding: 15px; border-radius: 12px;">
+                <input type="radio" name="paymentMethod" value="credit_card" />
+                <span>Cartão de Crédito</span>
+              </label>
+            </div>
+          </div>
+
           <div class="checkout-grid">
             <article class="checkout-panel">
               <span class="summary-kicker">Resumo do pagamento</span>
@@ -214,11 +228,11 @@
             </article>
 
             <article class="checkout-panel pix-checkout-panel">
-              <span class="summary-kicker">Pix</span>
+              <span class="summary-kicker" id="paymentMethodLabel">Pix</span>
               <strong id="checkoutPixAmount">R$ 25,00</strong>
               <p>Depois do pagamento aprovado, a recarga entra no histórico da sua conta.</p>
               <button class="Btn pay-recharge-button" type="button" id="payRechargeButton">
-                Gerar Pix
+                <span id="payRechargeButtonText">Gerar Pix</span>
                 <svg viewBox="0 0 576 512" class="svgIcon" aria-hidden="true">
                   <path d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z"></path>
                 </svg>
