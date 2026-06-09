@@ -553,9 +553,7 @@ const initRecharge = async (user) => {
     setPayButtonMode("start");
   };
 
-  document.querySelectorAll('input[name="paymentMethod"]').forEach(el => {
-    el.addEventListener('change', updateRateDisplay);
-  });
+
 
   const { data: profile } =
     supabaseClient && user
@@ -904,16 +902,34 @@ const initRecharge = async (user) => {
 
   const paymentMethodRadios = document.querySelectorAll('input[name="paymentMethod"]');
   const paymentMethodLabel = document.querySelector("#paymentMethodLabel");
+  const initialPaymentMethod = document.querySelector("#initialPaymentMethod");
+
+  const syncPaymentMethod = (method) => {
+    // Update step 1 select
+    if (initialPaymentMethod) {
+      initialPaymentMethod.value = method;
+    }
+    // Update step 3 radios
+    paymentMethodRadios.forEach(radio => {
+      radio.checked = (radio.value === method);
+    });
+    // Update label
+    if (paymentMethodLabel) {
+      paymentMethodLabel.textContent = method === "credit_card" ? "Cartão de Crédito" : "Pix";
+    }
+    resetPixState();
+    updateRateDisplay();
+  };
+
+  if (initialPaymentMethod) {
+    initialPaymentMethod.addEventListener("change", (e) => {
+      syncPaymentMethod(e.target.value);
+    });
+  }
 
   paymentMethodRadios.forEach(radio => {
-    radio.addEventListener('change', () => {
-      const method = document.querySelector('input[name="paymentMethod"]:checked').value;
-      if (method === "credit_card") {
-        if (paymentMethodLabel) paymentMethodLabel.textContent = "Cartão de Crédito";
-      } else {
-        if (paymentMethodLabel) paymentMethodLabel.textContent = "Pix";
-      }
-      resetPixState();
+    radio.addEventListener('change', (e) => {
+      syncPaymentMethod(e.target.value);
     });
   });
 
@@ -1032,7 +1048,8 @@ const initRecharge = async (user) => {
 
       try {
         if (!currentPixGenerated) {
-          showToast("Gerando Pix...");
+          const isCreditCard = document.querySelector('input[name="paymentMethod"]:checked')?.value === "credit_card";
+          showToast(isCreditCard ? "Gerando cobrança..." : "Gerando Pix...");
           const orderId = await generatePix();
           startPaymentPolling(orderId);
           return;

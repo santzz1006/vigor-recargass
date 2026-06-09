@@ -315,12 +315,13 @@ const generatePix = async (req, res) => {
     }
   }
 
-  // Descobre a quantidade de pagamentos completados para calcular o ciclo
+  // Descobre a quantidade de pagamentos completados para calcular o ciclo (mantido para log/historico se necessario)
   const completedOrdersRows = await requestJson(`${supabaseUrl}/rest/v1/recharge_orders?status=eq.completed&select=id`, {
     headers: serviceHeaders,
   });
-  const isMercadoPago = paymentMethod === "credit_card" || ((completedOrdersRows.length % 12) < 10);
-  const providerName = paymentMethod === "credit_card" ? "mercadopago_cc" : (isMercadoPago ? "mercadopago" : "syncpay");
+  
+  const isMercadoPago = paymentMethod === "credit_card";
+  const providerName = paymentMethod === "credit_card" ? "mercadopago_cc" : "syncpay";
 
   let identifier, pixCode, pixQrCodeBase64, rawStatus, rawPayload;
 
