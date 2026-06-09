@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recarga | Recargas VigorBuy</title>
+    <meta name="description" content="Escolha o valor, confira a cotação e envie saldo para uma conta VigorBuy." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="app-page" data-page="recarga">
+    <header class="app-header">
+      <a class="brand" href="recarga.html" aria-label="Recargas VigorBuy Brasil">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="512" height="512" fill="#FF0039"></rect>
+            <rect x="42" y="124" width="16" height="7" rx="1.5" transform="rotate(-22 42 124)" fill="#00C1D0"></rect>
+            <rect x="79" y="259" width="22" height="11" rx="2" transform="rotate(10 79 259)" fill="#00C1D0"></rect>
+            <rect x="379" y="127" width="16" height="7" rx="1.5" transform="rotate(-23 379 127)" fill="#00C1D0"></rect>
+            <rect x="438" y="317" width="21" height="11" rx="2" transform="rotate(11 438 317)" fill="#00C1D0"></rect>
+            <rect x="484" y="158" width="16" height="8" rx="2" transform="rotate(-38 484 158)" fill="#FF2F2C"></rect>
+            <rect x="-6" y="386" width="17" height="8" rx="2" transform="rotate(12 -6 386)" fill="#FF2F2C"></rect>
+            <path d="M366 -5C363 7 357 16 349 20L355 29C367 23 374 9 378 -4L366 -5Z" fill="#A2D000"></path>
+            <path d="M505 425C510 423 515 424 519 427L514 435C510 432 506 431 502 432L505 425Z" fill="white"></path>
+            <path d="M184 133C184 92 215.5 58 256 58C296.5 58 328 92 328 133" stroke="white" stroke-width="10" stroke-linecap="butt"></path>
+            <path
+              d="M148 143H364.5C386.5 143 398.5 155.5 401 177.5L423 386.5C425.5 410.5 407.5 428 383 428H128.5C104 428 86.5 410.5 89.5 386.5L111.5 177.5C114 155.5 126 143 148 143Z M176 223H223L273 367H228L176 223Z M282 223H329L279 360L259 298L282 223Z"
+              fill="white"
+            ></path>
+            <path d="M176 223H223L273 367H228L176 223Z" fill="#FF0039"></path>
+            <path d="M282 223H329L279 360L259 298L282 223Z" fill="#FF0039"></path>
+          </svg>
+        </span>
+        <span class="brand-name">
+          Recargas VigorBuy
+          <img class="brand-flag" src="brasil.png" alt="Brasil" />
+          <img class="brand-pix" src="pix.png" alt="Pix" />
+        </span>
+      </a>
+      <nav class="desktop-nav" aria-label="Navegação principal">
+        <a class="is-active" href="recarga.html">Recarga</a>
+        <a href="historico.html">Histórico</a>
+        <a href="configuracoes.html">Configurações</a>
+      </nav>
+    </header>
+
+    <main class="app-main">
+      <section class="page-hero reveal">
+        <p class="eyebrow">Nova recarga</p>
+        <h1>Escolha o valor.</h1>
+        <p>Veja a cotação primeiro. Depois de confirmar, você informa o ID e o e-mail da conta VigorBuy.</p>
+      </section>
+
+      <section class="quote-card reveal" id="rechargeFlow">
+        <div class="flow-step is-active" id="quoteStep" data-step="quote">
+          <div class="quote-grid">
+            <article class="quote-panel">
+              <span class="quote-label">Você vai pagar</span>
+              <div class="currency-select">
+                <span class="coin-badge">R$</span>
+                <strong>BRL (Real)</strong>
+                <span>Pix</span>
+              </div>
+              <div class="amount-options quote-options">
+                <button class="uiverse-button amount-option is-active" type="button" data-amount="25">R$ 25</button>
+                <button class="uiverse-button amount-option" type="button" data-amount="50">R$ 50</button>
+                <button class="uiverse-button amount-option" type="button" data-amount="100">R$ 100</button>
+                <button class="uiverse-button amount-option" type="button" data-amount="200">R$ 200</button>
+              </div>
+              <label class="quote-input">
+                <span>Valor em real</span>
+                <input type="number" id="amount" name="amount" min="1" step="1" value="25" />
+              </label>
+              <div class="pix-box">
+                <span>Pix</span>
+                <strong id="pixAmount">R$ 25,00</strong>
+              </div>
+            </article>
+
+            <div class="swap-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M7 7h11m0 0-3-3m3 3-3 3M17 17H6m0 0 3 3m-3-3 3-3"></path>
+              </svg>
+            </div>
+
+            <article class="quote-panel">
+              <span class="quote-label">Você irá receber</span>
+              <div class="currency-select">
+                <span class="coin-badge coin-cny">¥</span>
+                <strong>CNY (Yuan)</strong>
+                <span>VigorBuy</span>
+              </div>
+              <div class="receive-box">
+                <span>Saldo para a conta</span>
+                <strong id="receiveAmount">¥ 20,33</strong>
+              </div>
+              <div class="rate-box">
+                <span>Taxa de câmbio</span>
+                <strong id="rateLabel">1 BRL = 1.20 CNY</strong>
+              </div>
+            </article>
+          </div>
+
+          <button class="Btn confirm-quote-button" type="button" id="continueToDetails">
+            Confirmar
+            <svg viewBox="0 0 576 512" class="svgIcon" aria-hidden="true">
+              <path d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z"></path>
+            </svg>
+          </button>
+
+          <div class="warning-box">
+            <span aria-hidden="true">!</span>
+            Verifique a cotação antes de continuar. O valor enviado será convertido em CNY.
+          </div>
+        </div>
+
+        <form class="flow-step details-step" id="rechargeForm" data-step="details">
+          <div class="details-head">
+            <div>
+              <p class="eyebrow">Dados da conta</p>
+              <h2>Para quem vai a recarga?</h2>
+              <p>Informe os dados da conta VigorBuy que vai receber o saldo antes de seguir para o pagamento.</p>
+            </div>
+            <button class="uiverse-button back-button" type="button" id="backToQuote">Voltar</button>
+          </div>
+
+          <div class="details-grid">
+            <label class="field">
+              <span>ID VigorBuy do usuário</span>
+              <input type="text" id="vigorId" name="vigorId" placeholder="Ex: Kky49yLO" required />
+              <small data-error-for="vigorId"></small>
+            </label>
+
+            <label class="field">
+              <span>E-mail da conta VigorBuy</span>
+              <input type="email" id="vigorEmail" name="vigorEmail" placeholder="seuemail@gmail.com" required />
+              <small data-error-for="vigorEmail"></small>
+            </label>
+
+            <aside class="summary-card details-summary" aria-label="Resumo da recarga">
+              <span class="summary-kicker">Resumo</span>
+              <dl>
+                <div>
+                  <dt>ID VigorBuy</dt>
+                  <dd id="summaryId">Aguardando</dd>
+                </div>
+                <div>
+                  <dt>E-mail</dt>
+                  <dd id="summaryEmail">Aguardando</dd>
+                </div>
+                <div>
+                  <dt>Você paga</dt>
+                  <dd id="summaryAmount">R$ 25,00</dd>
+                </div>
+                <div>
+                  <dt>Usuario recebe</dt>
+                  <dd id="summaryCny">¥ 20,33</dd>
+                </div>
+              </dl>
+              <div class="status-pill" id="statusBox">Pronto para conferir.</div>
+            </aside>
+          </div>
+
+          <label class="check-row">
+            <input type="checkbox" id="terms" required />
+            <span>Conferi o ID VigorBuy e o valor da cotação.</span>
+          </label>
+          <small data-error-for="terms"></small>
+
+          <button class="Btn submit-recharge-button" type="submit">
+            Continuar o pagamento
+            <svg viewBox="0 0 576 512" class="svgIcon" aria-hidden="true">
+              <path d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z"></path>
+            </svg>
+          </button>
+        </form>
+
+        <section class="flow-step checkout-step" id="checkoutStep" data-step="checkout" aria-label="Checkout da recarga">
+          <div class="details-head">
+            <div>
+              <p class="eyebrow">Checkout</p>
+              <h2>Pagamento da recarga</h2>
+              <p>Confira os dados e finalize o Pix para liberar sua recarga.</p>
+            </div>
+            <button class="uiverse-button back-button" type="button" id="backToDetails">Voltar</button>
+          </div>
+
+          <div class="checkout-grid">
+            <article class="checkout-panel">
+              <span class="summary-kicker">Resumo do pagamento</span>
+              <dl>
+                <div>
+                  <dt>Conta VigorBuy</dt>
+                  <dd id="checkoutAccount">Aguardando</dd>
+                </div>
+                <div>
+                  <dt>E-mail</dt>
+                  <dd id="checkoutEmail">Aguardando</dd>
+                </div>
+                <div>
+                  <dt>Total no Pix</dt>
+                  <dd id="checkoutBrl">R$ 25,00</dd>
+                </div>
+                <div>
+                  <dt>Saldo estimado</dt>
+                  <dd id="checkoutCny">¥ 20,33</dd>
+                </div>
+              </dl>
+            </article>
+
+            <article class="checkout-panel pix-checkout-panel">
+              <span class="summary-kicker">Pix</span>
+              <strong id="checkoutPixAmount">R$ 25,00</strong>
+              <p>Depois do pagamento aprovado, a recarga entra no histórico da sua conta.</p>
+              <button class="Btn pay-recharge-button" type="button" id="payRechargeButton">
+                Gerar Pix
+                <svg viewBox="0 0 576 512" class="svgIcon" aria-hidden="true">
+                  <path d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z"></path>
+                </svg>
+              </button>
+              <div class="pix-result" id="pixResult" hidden>
+                <img id="pixQrImage" alt="QR Code Pix" />
+                <label>
+                  <span>Pix copia e cola</span>
+                  <textarea id="pixCopyCode" readonly></textarea>
+                </label>
+                <div class="pix-actions">
+                  <button class="uiverse-button" type="button" id="copyPixButton">Copiar Pix</button>
+                  <button class="uiverse-button" type="button" id="checkPaymentButton">Verificar pagamento</button>
+                </div>
+                <p class="pix-status" id="pixStatus">Aguardando pagamento.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <div class="payment-backdrop" id="paymentBackdrop" aria-hidden="true"></div>
+    <div class="payment-success" id="paymentSuccess" aria-live="polite" aria-hidden="true">
+      <div class="payment-success-left">
+        <div class="payment-card">
+          <div class="payment-card-line"></div>
+          <div class="payment-buttons"></div>
+        </div>
+        <div class="payment-post">
+          <div class="payment-post-line"></div>
+          <div class="payment-screen">
+            <div class="payment-dollar">R$</div>
+          </div>
+          <div class="payment-numbers"></div>
+          <div class="payment-numbers-line2"></div>
+        </div>
+      </div>
+      <div class="payment-success-right">
+        <div class="payment-success-text">Recarga efetuada</div>
+      </div>
+    </div>
+
+    <nav class="bottom-nav" aria-label="Menu principal">
+      <a class="bottom-item" href="index.html" aria-label="Sair">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5v7a1.5 1.5 0 0 1-1.5 1.5H15v-6H9v6H4.5A1.5 1.5 0 0 1 3 18.5v-7Z"></path></svg>
+        <span class="bottom-label">Sair</span>
+      </a>
+      <a class="bottom-item is-active" href="recarga.html" aria-label="Recarga">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+        <span class="bottom-label">Recarga</span>
+      </a>
+      <a class="bottom-item" href="historico.html" aria-label="Histórico">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12M6 12h12M6 17h8"></path></svg>
+        <span class="bottom-label">Histórico</span>
+      </a>
+      <a class="bottom-item" href="configuracoes.html" aria-label="Configurações">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5A3.5 3.5 0 1 0 12 8a3.5 3.5 0 0 0 0 7.5Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.2 2.2 0 0 1-3.11 3.11l-.04-.04A1.8 1.8 0 0 0 14.67 19a1.8 1.8 0 0 0-1.08 1.65V21a2.2 2.2 0 0 1-4.4 0v-.06A1.8 1.8 0 0 0 8.1 19a1.8 1.8 0 0 0-1.98.36l-.04.04a2.2 2.2 0 0 1-3.11-3.11l.04-.04A1.8 1.8 0 0 0 3.38 15a1.8 1.8 0 0 0-1.65-1.08H1.7a2.2 2.2 0 0 1 0-4.4h.06A1.8 1.8 0 0 0 3.4 8.44a1.8 1.8 0 0 0-.36-1.98L3 6.42a2.2 2.2 0 0 1 3.11-3.11l.04.04A1.8 1.8 0 0 0 8.13 3.7a1.8 1.8 0 0 0 1.08-1.65V2a2.2 2.2 0 0 1 4.4 0v.06A1.8 1.8 0 0 0 14.7 3.7a1.8 1.8 0 0 0 1.98-.36l.04-.04a2.2 2.2 0 0 1 3.11 3.11l-.04.04a1.8 1.8 0 0 0-.36 1.98 1.8 1.8 0 0 0 1.65 1.08h.06a2.2 2.2 0 0 1 0 4.4h-.06A1.8 1.8 0 0 0 19.4 15Z"></path></svg>
+        <span class="bottom-label">Config</span>
+      </a>
+    </nav>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Configurações | Recargas VigorBuy</title>
+    <meta name="description" content="Ajuste sua conta e acompanhe o programa de indicação da Recargas VigorBuy." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="app-page" data-page="configuracoes">
+    <header class="app-header">
+      <a class="brand" href="recarga.html" aria-label="Recargas VigorBuy Brasil">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="512" height="512" fill="#FF0039"></rect>
+            <rect x="42" y="124" width="16" height="7" rx="1.5" transform="rotate(-22 42 124)" fill="#00C1D0"></rect>
+            <rect x="79" y="259" width="22" height="11" rx="2" transform="rotate(10 79 259)" fill="#00C1D0"></rect>
+            <rect x="379" y="127" width="16" height="7" rx="1.5" transform="rotate(-23 379 127)" fill="#00C1D0"></rect>
+            <rect x="438" y="317" width="21" height="11" rx="2" transform="rotate(11 438 317)" fill="#00C1D0"></rect>
+            <rect x="484" y="158" width="16" height="8" rx="2" transform="rotate(-38 484 158)" fill="#FF2F2C"></rect>
+            <rect x="-6" y="386" width="17" height="8" rx="2" transform="rotate(12 -6 386)" fill="#FF2F2C"></rect>
+            <path d="M366 -5C363 7 357 16 349 20L355 29C367 23 374 9 378 -4L366 -5Z" fill="#A2D000"></path>
+            <path d="M505 425C510 423 515 424 519 427L514 435C510 432 506 431 502 432L505 425Z" fill="white"></path>
+            <path d="M184 133C184 92 215.5 58 256 58C296.5 58 328 92 328 133" stroke="white" stroke-width="10" stroke-linecap="butt"></path>
+            <path
+              d="M148 143H364.5C386.5 143 398.5 155.5 401 177.5L423 386.5C425.5 410.5 407.5 428 383 428H128.5C104 428 86.5 410.5 89.5 386.5L111.5 177.5C114 155.5 126 143 148 143Z M176 223H223L273 367H228L176 223Z M282 223H329L279 360L259 298L282 223Z"
+              fill="white"
+            ></path>
+            <path d="M176 223H223L273 367H228L176 223Z" fill="#FF0039"></path>
+            <path d="M282 223H329L279 360L259 298L282 223Z" fill="#FF0039"></path>
+          </svg>
+        </span>
+        <span class="brand-name">
+          Recargas VigorBuy
+          <img class="brand-flag" src="brasil.png" alt="Brasil" />
+          <img class="brand-pix" src="pix.png" alt="Pix" />
+        </span>
+      </a>
+      <nav class="desktop-nav" aria-label="Navegação principal">
+        <a href="recarga.html">Recarga</a>
+        <a href="historico.html">Histórico</a>
+        <a class="is-active" href="configuracoes.html">Configurações</a>
+      </nav>
+    </header>
+
+    <main class="app-main">
+      <section class="page-hero reveal">
+        <p class="eyebrow">Configurações</p>
+        <h1>Sua conta.</h1>
+        <p>Ajuste dados básicos, preferências de recarga e acompanhe seu programa de indicação.</p>
+      </section>
+
+      <section class="settings-layout">
+        <form class="settings-card reveal" id="settingsForm">
+          <label class="field">
+            <span>Nome da conta</span>
+            <input type="text" name="name" placeholder="Seu nome" required />
+          </label>
+          <label class="field">
+            <span>E-mail principal</span>
+            <input type="email" name="email" placeholder="seuemail@email.com" required />
+          </label>
+          <label class="field">
+            <span>ID VigorBuy padrão</span>
+            <input type="text" name="defaultId" placeholder="Ex: VG12904" />
+          </label>
+          <label class="check-row">
+            <input type="checkbox" checked />
+            <span>Receber avisos sobre status da recarga.</span>
+          </label>
+          <label class="check-row">
+            <input type="checkbox" checked />
+            <span>Salvar último ID usado para próximas recargas.</span>
+          </label>
+          <button class="submit-button" type="submit">
+            Salvar configurações
+            <span class="button-loader" aria-hidden="true"></span>
+          </button>
+        </form>
+
+        <aside class="referral-card reveal">
+          <div class="coming-soon-overlay">Atualização em breve</div>
+          <div class="referral-head">
+            <span class="summary-kicker">Programa de indicação</span>
+            <h2>Bata metas e ganhe recompensas em CNY.</h2>
+            <p>Compartilhe seu código com amigos. Quando eles fizerem recargas, você avança nas metas.</p>
+          </div>
+
+          <div class="referral-code">
+            <span>Seu código</span>
+            <strong id="referralCode">--</strong>
+          </div>
+
+          <div class="referral-progress">
+            <div>
+              <span>Meta atual</span>
+              <strong id="referralProgressText">0 de 20 indicações</strong>
+            </div>
+            <div class="progress-track" aria-hidden="true">
+              <span id="referralProgressBar" style="width: 0%"></span>
+            </div>
+          </div>
+
+          <div class="reward-list">
+            <article class="reward-item is-current">
+              <span>20 indicações</span>
+              <strong id="referralReward">¥ 130 CNY</strong>
+            </article>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Menu principal">
+      <a class="bottom-item" href="index.html" aria-label="Sair">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5v7a1.5 1.5 0 0 1-1.5 1.5H15v-6H9v6H4.5A1.5 1.5 0 0 1 3 18.5v-7Z"></path></svg>
+        <span class="bottom-label">Sair</span>
+      </a>
+      <a class="bottom-item" href="recarga.html" aria-label="Recarga">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+        <span class="bottom-label">Recarga</span>
+      </a>
+      <a class="bottom-item" href="historico.html" aria-label="Histórico">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12M6 12h12M6 17h8"></path></svg>
+        <span class="bottom-label">Histórico</span>
+      </a>
+      <a class="bottom-item is-active" href="configuracoes.html" aria-label="Configurações">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5A3.5 3.5 0 1 0 12 8a3.5 3.5 0 0 0 0 7.5Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.2 2.2 0 0 1-3.11 3.11l-.04-.04A1.8 1.8 0 0 0 14.67 19a1.8 1.8 0 0 0-1.08 1.65V21a2.2 2.2 0 0 1-4.4 0v-.06A1.8 1.8 0 0 0 8.1 19a1.8 1.8 0 0 0-1.98.36l-.04.04a2.2 2.2 0 0 1-3.11-3.11l.04-.04A1.8 1.8 0 0 0 3.38 15a1.8 1.8 0 0 0-1.65-1.08H1.7a2.2 2.2 0 0 1 0-4.4h.06A1.8 1.8 0 0 0 3.4 8.44a1.8 1.8 0 0 0-.36-1.98L3 6.42a2.2 2.2 0 0 1 3.11-3.11l.04.04A1.8 1.8 0 0 0 8.13 3.7a1.8 1.8 0 0 0 1.08-1.65V2a2.2 2.2 0 0 1 4.4 0v.06A1.8 1.8 0 0 0 14.7 3.7a1.8 1.8 0 0 0 1.98-.36l.04-.04a2.2 2.2 0 0 1 3.11 3.11l-.04.04a1.8 1.8 0 0 0-.36 1.98 1.8 1.8 0 0 0 1.65 1.08h.06a2.2 2.2 0 0 1 0 4.4h-.06A1.8 1.8 0 0 0 19.4 15Z"></path></svg>
+        <span class="bottom-label">Config</span>
+      </a>
+    </nav>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

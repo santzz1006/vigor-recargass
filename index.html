@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Recargas VigorBuy</title>
+    <meta name="description" content="Entre na sua conta para fazer recargas Vigor." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="login-page">
+    <main class="login-shell">
+      <section class="login-copy reveal">
+        <a class="brand brand-large login-brand-bar" href="index.html" aria-label="Recargas VigorBuy Brasil">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="512" height="512" fill="#FF0039"></rect>
+              <rect x="42" y="124" width="16" height="7" rx="1.5" transform="rotate(-22 42 124)" fill="#00C1D0"></rect>
+              <rect x="79" y="259" width="22" height="11" rx="2" transform="rotate(10 79 259)" fill="#00C1D0"></rect>
+              <rect x="379" y="127" width="16" height="7" rx="1.5" transform="rotate(-23 379 127)" fill="#00C1D0"></rect>
+              <rect x="438" y="317" width="21" height="11" rx="2" transform="rotate(11 438 317)" fill="#00C1D0"></rect>
+              <rect x="484" y="158" width="16" height="8" rx="2" transform="rotate(-38 484 158)" fill="#FF2F2C"></rect>
+              <rect x="-6" y="386" width="17" height="8" rx="2" transform="rotate(12 -6 386)" fill="#FF2F2C"></rect>
+              <path d="M366 -5C363 7 357 16 349 20L355 29C367 23 374 9 378 -4L366 -5Z" fill="#A2D000"></path>
+              <path d="M505 425C510 423 515 424 519 427L514 435C510 432 506 431 502 432L505 425Z" fill="white"></path>
+              <path d="M184 133C184 92 215.5 58 256 58C296.5 58 328 92 328 133" stroke="white" stroke-width="10" stroke-linecap="butt"></path>
+              <path
+                d="M148 143H364.5C386.5 143 398.5 155.5 401 177.5L423 386.5C425.5 410.5 407.5 428 383 428H128.5C104 428 86.5 410.5 89.5 386.5L111.5 177.5C114 155.5 126 143 148 143Z M176 223H223L273 367H228L176 223Z M282 223H329L279 360L259 298L282 223Z"
+                fill="white"
+              ></path>
+              <path d="M176 223H223L273 367H228L176 223Z" fill="#FF0039"></path>
+              <path d="M282 223H329L279 360L259 298L282 223Z" fill="#FF0039"></path>
+            </svg>
+          </span>
+          <span class="brand-name">
+            Recargas VigorBuy
+            <img class="brand-flag" src="brasil.png" alt="Brasil" />
+            <img class="brand-pix" src="pix.png" alt="Pix" />
+          </span>
+        </a>
+        <p class="eyebrow">Recargas VigorBuy no Brasil</p>
+        <h1>A melhor cotação <span class="rate-inline">BRL → CNY</span> para suas recargas.</h1>
+      </section>
+
+      <div class="login-card-wrap reveal">
+        <img class="login-pet" src="pet.sentado.png" alt="" aria-hidden="true" />
+        <section class="login-card" aria-labelledby="login-title">
+        <div class="heading" id="login-title">Sua conta</div>
+        <div class="auth-switch" role="tablist" aria-label="Acesso da conta">
+          <button class="auth-tab is-active" type="button" role="tab" aria-selected="true" data-auth-mode="login">
+            Acessar
+          </button>
+          <button class="auth-tab" type="button" role="tab" aria-selected="false" data-auth-mode="signup">
+            Criar conta
+          </button>
+        </div>
+        <form class="form" id="loginForm">
+          <input
+            class="input signup-only is-auth-hidden"
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Nome"
+            autocomplete="name"
+            aria-hidden="true"
+            disabled
+          />
+          <input required class="input" type="email" name="email" id="email" placeholder="E-mail" autocomplete="email" />
+          <input
+            required
+            class="input"
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Senha"
+            autocomplete="current-password"
+          />
+          <span class="forgot-password"><a href="suporte.html">Esqueceu a senha?</a></span>
+          <button class="login-button" type="submit">Continuar</button>
+        </form>
+
+        <div class="social-account-container">
+          <span class="title">Ou entre com</span>
+          <div class="social-accounts">
+            <button class="social-button google" id="googleLoginButton" type="button" aria-label="Entrar com Google">
+              <svg class="svg" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 488 512" aria-hidden="true">
+                <path
+                  d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="account-note">
+          <span data-auth-copy>Não tem conta?</span>
+          <button type="button" data-auth-toggle>Criar conta</button>
+        </div>
+        <span class="agreement">
+          <a href="suporte.html">Precisa de ajuda?</a>
+        </span>
+        </section>
+      </div>
+    </main>
+
+    <div class="loading-screen" id="loadingScreen" aria-hidden="true">
+      <div class="loader-wrapper" aria-label="Carregando">
+        <div class="loader-circle"></div>
+        <div class="loader-circle"></div>
+        <div class="loader-circle"></div>
+        <div class="loader-shadow"></div>
+        <div class="loader-shadow"></div>
+        <div class="loader-shadow"></div>
+      </div>
+      <p>Carregando sua conta...</p>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "name": "vigorbuy-recharge",
+  "version": "1.0.0",
+  "description": "VigorBuy Recharge integration with Mercado Pago and SyncPay",
+  "dependencies": {
+    "qrcode": "^1.5.3"
+  }
+}
