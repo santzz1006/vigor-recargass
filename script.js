@@ -495,26 +495,7 @@ const initRecharge = async (user) => {
     }
   };
 
-  const updateRateDisplay = () => {
-    const method = document.querySelector('input[name="paymentMethod"]:checked')?.value || "pix";
-    exchangeRate = method === "credit_card" ? ccRate : baseRate;
-    if (rateLabel) rateLabel.textContent = `1 BRL = ${exchangeRate.toFixed(2)} CNY`;
-    updateSummary();
-    
-    // Update texts
-    const checkoutPanelLabel = document.querySelector("#paymentMethodLabel");
-    if (checkoutPanelLabel) checkoutPanelLabel.textContent = method === "credit_card" ? "Cartão de Crédito" : "Pix";
-    
-    const checkoutBrlLabel = checkoutBrl?.previousElementSibling;
-    if (checkoutBrlLabel) checkoutBrlLabel.textContent = method === "credit_card" ? "Total no Cartão" : "Total no Pix";
-    
-    currentOrderId = null; // Force new order with new rate
-    setPayButtonMode("start");
-  };
 
-  document.querySelectorAll('input[name="paymentMethod"]').forEach(el => {
-    el.addEventListener('change', updateRateDisplay);
-  });
 
   let currentOrderId = null;
   let currentPixGenerated = false;
@@ -547,9 +528,34 @@ const initRecharge = async (user) => {
       pixQrImage.hidden = true;
       pixQrImage.removeAttribute("src");
     }
-    if (pixStatus) pixStatus.textContent = "Aguardando pagamento.";
-    setPayButtonMode("generate");
+    if (copyPixButton) copyPixButton.innerHTML = "Copiar Código Pix";
+    if (pixStatus) {
+      pixStatus.textContent = "Aguardando pagamento...";
+      pixStatus.className = "payment-status-badge pending";
+    }
+    setPayButtonMode("start");
   };
+
+  const updateRateDisplay = () => {
+    const method = document.querySelector('input[name="paymentMethod"]:checked')?.value || "pix";
+    exchangeRate = method === "credit_card" ? ccRate : baseRate;
+    if (rateLabel) rateLabel.textContent = `1 BRL = ${exchangeRate.toFixed(2)} CNY`;
+    updateSummary();
+    
+    // Update texts
+    const checkoutPanelLabel = document.querySelector("#paymentMethodLabel");
+    if (checkoutPanelLabel) checkoutPanelLabel.textContent = method === "credit_card" ? "Cartão de Crédito" : "Pix";
+    
+    const checkoutBrlLabel = checkoutBrl?.previousElementSibling;
+    if (checkoutBrlLabel) checkoutBrlLabel.textContent = method === "credit_card" ? "Total no Cartão" : "Total no Pix";
+    
+    resetPixState();
+    setPayButtonMode("start");
+  };
+
+  document.querySelectorAll('input[name="paymentMethod"]').forEach(el => {
+    el.addEventListener('change', updateRateDisplay);
+  });
 
   const { data: profile } =
     supabaseClient && user
