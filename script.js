@@ -538,8 +538,8 @@ const initRecharge = async (user) => {
 
   const updateRateDisplay = () => {
     const method = document.querySelector('input[name="paymentMethod"]:checked')?.value || "pix";
-    exchangeRate = method === "credit_card" ? ccRate : baseRate;
-    if (rateLabel) rateLabel.textContent = `1 BRL = ${exchangeRate.toFixed(2)} CNY`;
+    // Always show baseRate so the "cotação" doesn't change
+    if (rateLabel) rateLabel.textContent = `1 BRL = ${baseRate.toFixed(2)} CNY`;
     updateSummary();
     
     // Update texts
@@ -568,7 +568,8 @@ const initRecharge = async (user) => {
   if (profile?.default_vigorbuy_email) vigorEmail.value = profile.default_vigorbuy_email;
 
   const normalizeAmount = () => Number(String(amount.value).replace(",", "."));
-  const getCnyAmount = () => Number((Math.round(normalizeAmount() * exchangeRate * 100) / 100).toFixed(2));
+  // Always use baseRate to calculate CNY so the cotação is not altered
+  const getCnyAmount = () => Number((Math.round(normalizeAmount() * baseRate * 100) / 100).toFixed(2));
 
   const setError = (field, message) => {
     const error = document.querySelector(`[data-error-for="${field}"]`);
@@ -580,14 +581,37 @@ const initRecharge = async (user) => {
   };
 
   const updateSummary = () => {
+    const method = document.querySelector('input[name="paymentMethod"]:checked')?.value || "pix";
     const brlValue = normalizeAmount();
     const cnyValue = getCnyAmount();
-    const brlText = Number.isFinite(brlValue) && brlValue > 0 ? currency.format(brlValue) : "R$ 0,00";
+    
+    let finalBrlValue = brlValue;
+    let taxaBrl = 0;
+    
+    // Calculate fee if credit card is selected and ccRate is different from baseRate
+    if (method === "credit_card" && ccRate > 0 && ccRate !== baseRate) {
+      if (ccRate < baseRate) {
+        // e.g. baseRate 1.20, ccRate 1.10 -> card gives fewer CNY per BRL, so BRL price increases
+        finalBrlValue = cnyValue / ccRate;
+      } else {
+        // e.g. baseRate 1.20, ccRate 1.30 (if they configure it as a multiplier)
+        finalBrlValue = brlValue * (ccRate / baseRate);
+      }
+      taxaBrl = finalBrlValue - brlValue;
+    }
+
+    const brlText = Number.isFinite(finalBrlValue) && finalBrlValue > 0 ? currency.format(finalBrlValue) : "R$ 0,00";
     const cnyText = Number.isFinite(cnyValue) && cnyValue > 0 ? `¥ ${formatCny(cnyValue)}` : "¥ 0,00";
 
     summaryId.textContent = vigorId.value.trim() || "Aguardando";
     summaryEmail.textContent = vigorEmail.value.trim() || "Aguardando";
-    summaryAmount.textContent = brlText;
+    
+    if (taxaBrl > 0) {
+      summaryAmount.innerHTML = `${brlText} <span style="font-size: 0.75rem; color: var(--red); display: block;">(inclui ${currency.format(taxaBrl)} de taxa do cartão)</span>`;
+    } else {
+      summaryAmount.textContent = brlText;
+    }
+    
     summaryCny.textContent = cnyText;
     pixAmount.textContent = brlText;
     receiveAmount.textContent = cnyText;
@@ -663,13 +687,23 @@ const initRecharge = async (user) => {
       throw new Error("Entre na sua conta antes de gerar o Pix.");
     }
 
-    const brlValue = normalizeAmount();
+    let brlValue = normalizeAmount();
     const cnyValue = getCnyAmount();
+    const method = document.querySelector('input[name="paymentMethod"]:checked')?.value || "pix";
+
+    if (method === "credit_card" && ccRate > 0 && ccRate !== baseRate) {
+      if (ccRate < baseRate) {
+        brlValue = cnyValue / ccRate;
+      } else {
+        brlValue = normalizeAmount() * (ccRate / baseRate);
+      }
+    }
+
     const orderPayload = {
       vigorbuyId: vigorId.value.trim(),
       vigorbuyEmail: vigorEmail.value.trim(),
       brlAmount: brlValue,
-      exchangeRate,
+      exchangeRate: baseRate,
       cnyAmount: cnyValue,
     };
 
@@ -702,7 +736,7 @@ const initRecharge = async (user) => {
         vigorbuy_id: vigorId.value.trim(),
         vigorbuy_email: vigorEmail.value.trim(),
         brl_amount: brlValue,
-        exchange_rate: exchangeRate,
+        exchange_rate: baseRate,
         cny_amount: cnyValue,
         status: "waiting_payment",
         quote_snapshot: {
@@ -710,7 +744,7 @@ const initRecharge = async (user) => {
           to: "CNY",
           brl_amount: brlValue,
           cny_amount: cnyValue,
-          exchange_rate: exchangeRate,
+          exchange_rate: baseRate,
         },
       })
       .select()
