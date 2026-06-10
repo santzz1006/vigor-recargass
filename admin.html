@@ -1,226 +1,230 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin | Recargas VigorBuy</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="supabase-config.js"></script>
-  </head>
-  <body class="app-page">
-    <div id="toast" class="toast"></div>
-    <header class="app-header">
-      <a class="brand" href="index.html" aria-label="Recargas VigorBuy Brasil">
-        <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="512" height="512" fill="#FF0039"></rect>
-            <rect x="42" y="124" width="16" height="7" rx="1.5" transform="rotate(-22 42 124)" fill="#00C1D0"></rect>
-            <rect x="79" y="259" width="22" height="11" rx="2" transform="rotate(10 79 259)" fill="#00C1D0"></rect>
-            <rect x="379" y="127" width="16" height="7" rx="1.5" transform="rotate(-23 379 127)" fill="#00C1D0"></rect>
-            <rect x="438" y="317" width="21" height="11" rx="2" transform="rotate(11 438 317)" fill="#00C1D0"></rect>
-            <rect x="484" y="158" width="16" height="8" rx="2" transform="rotate(-38 484 158)" fill="#FF2F2C"></rect>
-            <rect x="-6" y="386" width="17" height="8" rx="2" transform="rotate(12 -6 386)" fill="#FF2F2C"></rect>
-            <path d="M366 -5C363 7 357 16 349 20L355 29C367 23 374 9 378 -4L366 -5Z" fill="#A2D000"></path>
-            <path d="M505 425C510 423 515 424 519 427L514 435C510 432 506 431 502 432L505 425Z" fill="white"></path>
-            <path d="M184 133C184 92 215.5 58 256 58C296.5 58 328 92 328 133" stroke="white" stroke-width="10" stroke-linecap="butt"></path>
-            <path d="M148 143H364.5C386.5 143 398.5 155.5 401 177.5L423 386.5C425.5 410.5 407.5 428 383 428H128.5C104 428 86.5 410.5 89.5 386.5L111.5 177.5C114 155.5 126 143 148 143Z M176 223H223L273 367H228L176 223Z M282 223H329L279 360L259 298L282 223Z" fill="white"></path>
-            <path d="M176 223H223L273 367H228L176 223Z" fill="#FF0039"></path>
-            <path d="M282 223H329L279 360L259 298L282 223Z" fill="#FF0039"></path>
-          </svg>
-        </span>
-        <span class="brand-name">
-          Recargas VigorBuy
-          <img class="brand-flag" src="brasil.png" alt="Brasil" />
-          <img class="brand-pix" src="pix.png" alt="Pix" />
-        </span>
-      </a>
-      <nav class="desktop-nav" aria-label="Navegação principal">
-        <a href="recarga.html">Recarga</a>
-        <a href="historico.html">Histórico</a>
-        <a href="configuracoes.html">Configurações</a>
-      </nav>
-    </header>
 
-    <main class="app-main">
-      <section class="page-hero reveal">
-        <p class="eyebrow">Gestão</p>
-        <h1>Painel Admin.</h1>
-        <p>Ajuste a cotação global do site e monitore os últimos pagamentos aprovados via Mercado Pago.</p>
-      </section>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin | Recargas VigorBuy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+</head>
 
-      <section class="settings-layout">
-        <!-- TELA DE LOGIN -->
-        <div class="settings-card reveal" id="loginScreen" style="padding-bottom: 24px;">
-          <h2 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 20px;">Acesso Restrito</h2>
-          <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 24px;">Digite a chave de segurança para acessar o painel.</p>
+<body class="app-page">
+  <div id="toast" class="toast"></div>
+  <header class="app-header">
+    <a class="brand" href="index.html" aria-label="Recargas VigorBuy Brasil">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="512" height="512" fill="#FF0039"></rect>
+          <rect x="42" y="124" width="16" height="7" rx="1.5" transform="rotate(-22 42 124)" fill="#00C1D0"></rect>
+          <rect x="79" y="259" width="22" height="11" rx="2" transform="rotate(10 79 259)" fill="#00C1D0"></rect>
+          <rect x="379" y="127" width="16" height="7" rx="1.5" transform="rotate(-23 379 127)" fill="#00C1D0"></rect>
+          <rect x="438" y="317" width="21" height="11" rx="2" transform="rotate(11 438 317)" fill="#00C1D0"></rect>
+          <rect x="484" y="158" width="16" height="8" rx="2" transform="rotate(-38 484 158)" fill="#FF2F2C"></rect>
+          <rect x="-6" y="386" width="17" height="8" rx="2" transform="rotate(12 -6 386)" fill="#FF2F2C"></rect>
+          <path d="M366 -5C363 7 357 16 349 20L355 29C367 23 374 9 378 -4L366 -5Z" fill="#A2D000"></path>
+          <path d="M505 425C510 423 515 424 519 427L514 435C510 432 506 431 502 432L505 425Z" fill="white"></path>
+          <path d="M184 133C184 92 215.5 58 256 58C296.5 58 328 92 328 133" stroke="white" stroke-width="10"
+            stroke-linecap="butt"></path>
+          <path
+            d="M148 143H364.5C386.5 143 398.5 155.5 401 177.5L423 386.5C425.5 410.5 407.5 428 383 428H128.5C104 428 86.5 410.5 89.5 386.5L111.5 177.5C114 155.5 126 143 148 143Z M176 223H223L273 367H228L176 223Z M282 223H329L279 360L259 298L282 223Z"
+            fill="white"></path>
+          <path d="M176 223H223L273 367H228L176 223Z" fill="#FF0039"></path>
+          <path d="M282 223H329L279 360L259 298L282 223Z" fill="#FF0039"></path>
+        </svg>
+      </span>
+      <span class="brand-name">
+        Recargas VigorBuy
+        <img class="brand-flag" src="brasil.png" alt="Brasil" />
+        <img class="brand-pix" src="pix.png" alt="Pix" />
+      </span>
+    </a>
+    <nav class="desktop-nav" aria-label="Navegação principal">
+      <a href="recarga.html">Recarga</a>
+      <a href="historico.html">Histórico</a>
+      <a href="configuracoes.html">Configurações</a>
+    </nav>
+  </header>
+
+  <main class="app-main">
+    <section class="page-hero reveal">
+      <p class="eyebrow">Gestão</p>
+      <h1>Painel Admin.</h1>
+      <p>Ajuste a cotação global do site e monitore os últimos pagamentos aprovados via Mercado Pago.</p>
+    </section>
+
+    <section class="settings-layout">
+      <!-- TELA DE LOGIN -->
+      <div class="settings-card reveal" id="loginScreen" style="padding-bottom: 24px;">
+        <h2 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 20px;">Acesso Restrito</h2>
+        <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 24px;">Digite a chave de segurança para acessar
+          o painel.</p>
+        <label class="field" style="margin-bottom: 24px;">
+          <span>Chave Admin</span>
+          <input type="password" id="adminKeyInput" placeholder="Sua senha..." />
+        </label>
+        <button id="loginBtn" class="submit-button" type="button">
+          Entrar
+        </button>
+      </div>
+
+      <!-- PAINEL REAL (Oculto por padrão) -->
+      <div id="adminPanel" style="display: none;">
+        <!-- Card de Cotação -->
+        <div class="settings-card reveal" style="padding-bottom: 24px; margin-bottom: 24px;">
+          <h2 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 20px;">Cotação do Dia</h2>
           <label class="field" style="margin-bottom: 24px;">
-            <span>Chave Admin</span>
-            <input type="password" id="adminKeyInput" placeholder="Sua senha..." />
+            <span>Cotação BRL/CNY Atual (Pix)</span>
+            <input type="number" id="rateInput" step="0.01" placeholder="Carregando..." />
           </label>
-          <button id="loginBtn" class="submit-button" type="button">
-            Entrar
+          <button id="saveRateBtn" class="submit-button" type="button">
+            Salvar Cotação
+            <span class="button-loader" aria-hidden="true"></span>
           </button>
         </div>
 
-        <!-- PAINEL REAL (Oculto por padrão) -->
-        <div id="adminPanel" style="display: none;">
-          <!-- Card de Cotação -->
-          <div class="settings-card reveal" style="padding-bottom: 24px; margin-bottom: 24px;">
-            <h2 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 20px;">Cotação do Dia</h2>
-            <label class="field" style="margin-bottom: 24px;">
-              <span>Cotação BRL/CNY Atual (Pix)</span>
-              <input type="number" id="rateInput" step="0.01" placeholder="Carregando..." />
-            </label>
-            <label class="field" style="margin-bottom: 24px;">
-              <span>Cotação BRL/CNY Atual (Cartão)</span>
-              <input type="number" id="ccRateInput" step="0.01" placeholder="Carregando..." />
-            </label>
-            <button id="saveRateBtn" class="submit-button" type="button">
-              Salvar Cotação
-              <span class="button-loader" aria-hidden="true"></span>
-            </button>
-          </div>
+        <!-- Card de Histórico MP -->
+        <div class="settings-card reveal" style="padding-bottom: 24px;">
+          <h2 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 10px;">Transações Mercado Pago</h2>
+          <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 24px;">Exibe apenas faturamentos Pix
+            oficiais.</p>
 
-          <!-- Card de Histórico MP -->
-          <div class="settings-card reveal" style="padding-bottom: 24px;">
-            <h2 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 10px;">Transações Mercado Pago</h2>
-            <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 24px;">Exibe apenas faturamentos Pix oficiais.</p>
-            
-            <button id="refreshTxBtn" class="submit-button" type="button" style="margin-bottom: 24px; background: rgba(229, 9, 20, 0.1); border: 1px solid var(--red); color: var(--red);">
-              Atualizar Lista
-              <span class="button-loader" aria-hidden="true"></span>
-            </button>
-            
-            <div id="txList" style="max-height: 400px; overflow-y: auto; padding-right: 12px; display: flex; flex-direction: column; gap: 16px;">
-              <p style="color: var(--muted); text-align: center;">Clique para carregar as transações.</p>
-            </div>
+          <button id="refreshTxBtn" class="submit-button" type="button"
+            style="margin-bottom: 24px; background: rgba(229, 9, 20, 0.1); border: 1px solid var(--red); color: var(--red);">
+            Atualizar Lista
+            <span class="button-loader" aria-hidden="true"></span>
+          </button>
+
+          <div id="txList"
+            style="max-height: 400px; overflow-y: auto; padding-right: 12px; display: flex; flex-direction: column; gap: 16px;">
+            <p style="color: var(--muted); text-align: center;">Clique para carregar as transações.</p>
           </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
+  </main>
 
-    <nav class="bottom-nav" aria-label="Menu principal">
-      <a class="bottom-item" href="index.html" aria-label="Sair">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5v7a1.5 1.5 0 0 1-1.5 1.5H15v-6H9v6H4.5A1.5 1.5 0 0 1 3 18.5v-7Z"></path></svg>
-        <span class="bottom-label">Sair</span>
-      </a>
-      <a class="bottom-item is-active" href="admin.html" aria-label="Admin">
-        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-        <span class="bottom-label">Admin</span>
-      </a>
-    </nav>
+  <nav class="bottom-nav" aria-label="Menu principal">
+    <a class="bottom-item" href="index.html" aria-label="Sair">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 11.5 12 4l9 7.5v7a1.5 1.5 0 0 1-1.5 1.5H15v-6H9v6H4.5A1.5 1.5 0 0 1 3 18.5v-7Z"></path>
+      </svg>
+      <span class="bottom-label">Sair</span>
+    </a>
+    <a class="bottom-item is-active" href="admin.html" aria-label="Admin">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+      </svg>
+      <span class="bottom-label">Admin</span>
+    </a>
+  </nav>
 
-    <script>
-      const supabaseClient = window.supabase.createClient(window.VIGOR_ENV.supabaseUrl, window.VIGOR_ENV.supabaseAnonKey);
-      const supabaseAdminClient = window.supabase.createClient(window.VIGOR_ENV.supabaseAdminUrl, window.VIGOR_ENV.supabaseAdminKey);
-      
-      const toast = document.getElementById("toast");
-      const showToast = (msg) => {
-        toast.textContent = msg;
-        toast.classList.add("is-visible");
-        clearTimeout(window.toastTimer);
-        window.toastTimer = setTimeout(() => toast.classList.remove("is-visible"), 3000);
-      };
+  <script>
+    const supabaseClient = window.supabase.createClient(window.VIGOR_ENV.supabaseUrl, window.VIGOR_ENV.supabaseAnonKey);
+    const supabaseAdminClient = window.supabase.createClient(window.VIGOR_ENV.supabaseAdminUrl, window.VIGOR_ENV.supabaseAdminKey);
 
-      const formatBRL = (val) => new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(val);
-      const formatCNY = (val) => "¥ " + Number(val).toLocaleString("pt-BR", { minimumFractionDigits: 2 });
+    const toast = document.getElementById("toast");
+    const showToast = (msg) => {
+      toast.textContent = msg;
+      toast.classList.add("is-visible");
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(() => toast.classList.remove("is-visible"), 3000);
+    };
 
-      let adminKey = "";
+    const formatBRL = (val) => new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(val);
+    const formatCNY = (val) => "¥ " + Number(val).toLocaleString("pt-BR", { minimumFractionDigits: 2 });
 
-      document.getElementById("loginBtn").addEventListener("click", () => {
-        const val = document.getElementById("adminKeyInput").value.trim();
-        if (!val) return showToast("Digite a senha.");
-        adminKey = val;
-        document.getElementById("loginScreen").style.display = "none";
-        document.getElementById("adminPanel").style.display = "block";
-        loadRate();
-      });
+    let adminKey = "";
 
-      const loadRate = async () => {
-        try {
-          const { data, error } = await supabaseAdminClient.from('exchange_rates').select('id, rate').in('id', [1, 2]);
-          if (data && data.length > 0) {
-            const pixData = data.find(r => r.id === 1);
-            const ccData = data.find(r => r.id === 2);
-            if (pixData) document.getElementById("rateInput").value = pixData.rate;
-            document.getElementById("ccRateInput").value = ccData ? ccData.rate : (pixData ? pixData.rate : 1.20);
+    document.getElementById("loginBtn").addEventListener("click", () => {
+      const val = document.getElementById("adminKeyInput").value.trim();
+      if (!val) return showToast("Digite a senha.");
+      adminKey = val;
+      document.getElementById("loginScreen").style.display = "none";
+      document.getElementById("adminPanel").style.display = "block";
+      loadRate();
+    });
+
+    const loadRate = async () => {
+      try {
+        const { data, error } = await supabaseAdminClient.from('exchange_rates').select('id, rate').eq('id', 1);
+        if (data && data.length > 0) {
+          const pixData = data.find(r => r.id === 1);
+          if (pixData) document.getElementById("rateInput").value = pixData.rate;
+        }
+        if (error) console.error("Erro ao carregar cotação:", error);
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    document.getElementById("saveRateBtn").addEventListener("click", async (e) => {
+      const btn = e.target;
+      btn.classList.add("is-loading");
+      const newRate = parseFloat(document.getElementById("rateInput").value);
+      if (isNaN(newRate)) {
+        btn.classList.remove("is-loading");
+        return showToast("Valor inválido");
+      }
+
+      try {
+        const res = await fetch("/api/admin/rate", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-admin-key": adminKey
+          },
+          body: JSON.stringify({ rate: newRate })
+        });
+        const data = await res.json();
+        if (!res.ok || data.error) throw new Error(data.error || "Erro ao salvar.");
+        showToast("Cotação atualizada na Vercel!");
+      } catch (err) {
+        showToast("Erro: " + err.message);
+      } finally {
+        btn.classList.remove("is-loading");
+      }
+    });
+
+    document.getElementById("refreshTxBtn").addEventListener("click", async (e) => {
+      const btn = e.target.closest("button");
+      btn.classList.add("is-loading");
+      const list = document.getElementById("txList");
+
+      try {
+        const { data: session } = await supabaseClient.auth.getSession();
+        if (!session?.session) throw new Error("Faça login no site principal primeiro para ver o histórico.");
+
+        const res = await fetch("/api/admin/transactions", {
+          headers: {
+            "Authorization": `Bearer ${session.session.access_token}`,
+            "x-admin-key": adminKey
           }
-          if (error) console.error("Erro ao carregar cotação:", error);
-        } catch (e) {
-          console.error(e);
-        }
-      };
+        });
 
-      document.getElementById("saveRateBtn").addEventListener("click", async (e) => {
-        const btn = e.target;
-        btn.classList.add("is-loading");
-        const newRate = parseFloat(document.getElementById("rateInput").value);
-        const newCcRate = parseFloat(document.getElementById("ccRateInput").value);
-        if (isNaN(newRate) || isNaN(newCcRate)) {
-          btn.classList.remove("is-loading");
-          return showToast("Valor inválido");
-        }
-        
+        let data;
         try {
-          const res = await fetch("/api/admin/rate", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "x-admin-key": adminKey
-            },
-            body: JSON.stringify({ rate: newRate, cc_rate: newCcRate })
-          });
-          const data = await res.json();
-          if (!res.ok || data.error) throw new Error(data.error || "Erro ao salvar.");
-          showToast("Cotação atualizada na Vercel!");
+          data = await res.json();
         } catch (err) {
-          showToast("Erro: " + err.message);
-        } finally {
-          btn.classList.remove("is-loading");
+          throw new Error("Não foi possível acessar a API de transações. Certifique-se de que o backend está rodando corretamente (Vercel).");
         }
-      });
 
-      document.getElementById("refreshTxBtn").addEventListener("click", async (e) => {
-        const btn = e.target.closest("button");
-        btn.classList.add("is-loading");
-        const list = document.getElementById("txList");
-        
-        try {
-          const { data: session } = await supabaseClient.auth.getSession();
-          if (!session?.session) throw new Error("Faça login no site principal primeiro para ver o histórico.");
+        if (data.error) throw new Error(data.error);
 
-          const res = await fetch("/api/admin/transactions", {
-            headers: { 
-              "Authorization": `Bearer ${session.session.access_token}`,
-              "x-admin-key": adminKey
-            }
-          });
-          
-          let data;
-          try {
-            data = await res.json();
-          } catch(err) {
-            throw new Error("Não foi possível acessar a API de transações. Certifique-se de que o backend está rodando corretamente (Vercel).");
-          }
-
-          if (data.error) throw new Error(data.error);
-
-          if (!data.transactions || data.transactions.length === 0) {
-            list.innerHTML = "<p style='color: var(--muted); text-align: center;'>Nenhuma transação encontrada.</p>";
-          } else {
-            list.innerHTML = data.transactions.map(tx => {
-              const date = new Date(tx.created_at).toLocaleString('pt-BR');
-              const statusColor = tx.status === 'paid' ? 'var(--green)' : (tx.status === 'pending' ? '#ffb300' : 'var(--red)');
-              const brl = tx.recharge_orders ? tx.recharge_orders.brl_amount : tx.amount;
-              const cny = tx.recharge_orders ? tx.recharge_orders.cny_amount : 0;
-              return `
+        if (!data.transactions || data.transactions.length === 0) {
+          list.innerHTML = "<p style='color: var(--muted); text-align: center;'>Nenhuma transação encontrada.</p>";
+        } else {
+          list.innerHTML = data.transactions.map(tx => {
+            const date = new Date(tx.created_at).toLocaleString('pt-BR');
+            const statusColor = tx.status === 'paid' ? 'var(--green)' : (tx.status === 'pending' ? '#ffb300' : 'var(--red)');
+            const brl = tx.recharge_orders ? tx.recharge_orders.brl_amount : tx.amount;
+            const cny = tx.recharge_orders ? tx.recharge_orders.cny_amount : 0;
+            return `
                 <div style="padding: 16px; border: 1px solid var(--line); border-radius: 12px; border-left: 4px solid ${statusColor}; margin: 0; display: flex; flex-direction: column; gap: 8px; background: rgba(0,0,0,0.2);">
                   <div style="display: flex; justify-content: space-between; align-items: center; font-weight: bold;">
                     <span style="font-size: 1.1rem; color: #fff;">${formatBRL(brl)}</span>
@@ -230,31 +234,32 @@
                   <div style="font-size: 0.8rem; color: var(--muted);">Data: ${date}</div>
                 </div>
               `;
-            }).join('');
-          }
-        } catch (err) {
-          showToast(err.message);
-          list.innerHTML = `<p style='color: var(--red); text-align: center; font-weight: bold;'>${err.message}</p>`;
-        } finally {
-          btn.classList.remove("is-loading");
+          }).join('');
         }
+      } catch (err) {
+        showToast(err.message);
+        list.innerHTML = `<p style='color: var(--red); text-align: center; font-weight: bold;'>${err.message}</p>`;
+      } finally {
+        btn.classList.remove("is-loading");
+      }
+    });
+
+    // Animações simples para simular o reveal
+    setTimeout(() => {
+      document.querySelectorAll('.reveal').forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+        el.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
       });
+    }, 50);
 
-      // Animações simples para simular o reveal
-      setTimeout(() => {
-        document.querySelectorAll('.reveal').forEach(el => {
-          el.style.opacity = '1';
-          el.style.transform = 'translateY(0)';
-          el.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
-        });
-      }, 50);
+    (async () => {
+      const { data: session } = await supabaseClient.auth.getSession();
+      if (!session?.session) {
+        showToast("Você não está logado no banco principal.");
+      }
+    })();
+  </script>
+</body>
 
-      (async () => {
-        const { data: session } = await supabaseClient.auth.getSession();
-        if (!session?.session) {
-          showToast("Você não está logado no banco principal.");
-        }
-      })();
-    </script>
-  </body>
 </html>

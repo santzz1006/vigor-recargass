@@ -537,17 +537,15 @@ const initRecharge = async (user) => {
   };
 
   const updateRateDisplay = () => {
-    const method = document.querySelector('input[name="paymentMethod"]:checked')?.value || "pix";
-    // Always show baseRate so the "cotação" doesn't change
     if (rateLabel) rateLabel.textContent = `1 BRL = ${baseRate.toFixed(2)} CNY`;
     updateSummary();
     
     // Update texts
     const checkoutPanelLabel = document.querySelector("#paymentMethodLabel");
-    if (checkoutPanelLabel) checkoutPanelLabel.textContent = method === "credit_card" ? "Cartão de Crédito" : "Pix";
+    if (checkoutPanelLabel) checkoutPanelLabel.textContent = "Pix";
     
     const checkoutBrlLabel = checkoutBrl?.previousElementSibling;
-    if (checkoutBrlLabel) checkoutBrlLabel.textContent = method === "credit_card" ? "Total no Cartão" : "Total no Pix";
+    if (checkoutBrlLabel) checkoutBrlLabel.textContent = "Total no Pix";
     
     resetPixState();
     setPayButtonMode("start");
@@ -581,37 +579,15 @@ const initRecharge = async (user) => {
   };
 
   const updateSummary = () => {
-    const method = document.querySelector('input[name="paymentMethod"]:checked')?.value || "pix";
     const brlValue = normalizeAmount();
     const cnyValue = getCnyAmount();
     
-    let finalBrlValue = brlValue;
-    let taxaBrl = 0;
-    
-    // Calculate fee if credit card is selected and ccRate is different from baseRate
-    if (method === "credit_card" && ccRate > 0 && ccRate !== baseRate) {
-      if (ccRate < baseRate) {
-        // e.g. baseRate 1.20, ccRate 1.10 -> card gives fewer CNY per BRL, so BRL price increases
-        finalBrlValue = cnyValue / ccRate;
-      } else {
-        // e.g. baseRate 1.20, ccRate 1.30 (if they configure it as a multiplier)
-        finalBrlValue = brlValue * (ccRate / baseRate);
-      }
-      taxaBrl = finalBrlValue - brlValue;
-    }
-
-    const brlText = Number.isFinite(finalBrlValue) && finalBrlValue > 0 ? currency.format(finalBrlValue) : "R$ 0,00";
+    const brlText = Number.isFinite(brlValue) && brlValue > 0 ? currency.format(brlValue) : "R$ 0,00";
     const cnyText = Number.isFinite(cnyValue) && cnyValue > 0 ? `¥ ${formatCny(cnyValue)}` : "¥ 0,00";
 
     summaryId.textContent = vigorId.value.trim() || "Aguardando";
     summaryEmail.textContent = vigorEmail.value.trim() || "Aguardando";
-    
-    if (taxaBrl > 0) {
-      summaryAmount.innerHTML = `${brlText} <span style="font-size: 0.75rem; color: var(--red); display: block;">(inclui ${currency.format(taxaBrl)} de taxa do cartão)</span>`;
-    } else {
-      summaryAmount.textContent = brlText;
-    }
-    
+    summaryAmount.textContent = brlText;
     summaryCny.textContent = cnyText;
     pixAmount.textContent = brlText;
     receiveAmount.textContent = cnyText;
@@ -687,17 +663,8 @@ const initRecharge = async (user) => {
       throw new Error("Entre na sua conta antes de gerar o Pix.");
     }
 
-    let brlValue = normalizeAmount();
+    const brlValue = normalizeAmount();
     const cnyValue = getCnyAmount();
-    const method = document.querySelector('input[name="paymentMethod"]:checked')?.value || "pix";
-
-    if (method === "credit_card" && ccRate > 0 && ccRate !== baseRate) {
-      if (ccRate < baseRate) {
-        brlValue = cnyValue / ccRate;
-      } else {
-        brlValue = normalizeAmount() * (ccRate / baseRate);
-      }
-    }
 
     const orderPayload = {
       vigorbuyId: vigorId.value.trim(),
@@ -792,16 +759,8 @@ const initRecharge = async (user) => {
     const order = currentOrderId ? { id: currentOrderId } : await createRechargeOrder();
     currentOrderId = order.id;
 
-    const paymentMethodInput = document.querySelector('input[name="paymentMethod"]:checked');
-    const paymentMethod = paymentMethodInput ? paymentMethodInput.value : "pix";
-
     try {
-      const localData = await callLocalApi("/api/syncpay/cashin", { orderId: order.id, method: paymentMethod });
-      
-      if (paymentMethod === "credit_card" && localData.init_point) {
-        showLoadingAndGo(localData.init_point, 0);
-        return order.id;
-      }
+      const localData = await callLocalApi("/api/syncpay/cashin", { orderId: order.id, method: "pix" });
       
       renderPix(localData);
       showToast("Pix gerado. Use o QR Code ou Pix copia e cola.");
@@ -811,16 +770,11 @@ const initRecharge = async (user) => {
     }
 
     const { data, error } = await supabaseClient.functions.invoke("syncpay-cashin", {
-      body: { orderId: order.id, method: paymentMethod },
+      body: { orderId: order.id, method: "pix" },
     });
 
     if (error || data?.error) {
       throw new Error(getApiErrorMessage(data, error, "Erro ao gerar pagamento."));
-    }
-
-    if (paymentMethod === "credit_card" && data.init_point) {
-      showLoadingAndGo(data.init_point, 0);
-      return order.id;
     }
 
     renderPix(data);
@@ -1082,8 +1036,7 @@ const initRecharge = async (user) => {
 
       try {
         if (!currentPixGenerated) {
-          const isCreditCard = document.querySelector('input[name="paymentMethod"]:checked')?.value === "credit_card";
-          showToast(isCreditCard ? "Gerando cobrança..." : "Gerando Pix...");
+          showToast("Gerando Pix...");
           const orderId = await generatePix();
           startPaymentPolling(orderId);
           return;
