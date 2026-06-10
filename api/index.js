@@ -811,6 +811,33 @@ const getAdminTransactions = async (req, res) => {
   }
 };
 
+const getAllAdminTransactions = async (req, res) => {
+  try {
+    if (req.headers["x-admin-key"] !== "joaoPalmeirense") {
+      return sendJson(res, 403, { error: "Acesso bloqueado: Senha administrativa incorreta." });
+    }
+
+    const authHeader = req.headers.authorization;
+    if (!authHeader) return sendJson(res, 401, { error: "Sem token de autorização" });
+
+    const token = authHeader.split(" ")[1];
+    const { data: { user }, error: authError } = await supabase.auth.getUser(token);
+    if (authError || !user) return sendJson(res, 401, { error: "Sua sessão principal expirou." });
+
+    const { data, error } = await supabase
+      .from('payments')
+      .select('id, amount, status, created_at, provider, recharge_orders (id, brl_amount, cny_amount, vigorbuy_id, vigorbuy_email, protocol)')
+      .order('created_at', { ascending: false })
+      .limit(100);
+
+    if (error) throw error;
+    return sendJson(res, 200, { transactions: data });
+  } catch (err) {
+    console.error("[Admin All Transactions Error]", err);
+    return sendJson(res, 500, { error: err.message });
+  }
+};
+
 const updateAdminRate = async (req, res) => {
   try {
     if (req.headers["x-admin-key"] !== "joaoPalmeirense") {
@@ -881,6 +908,7 @@ const handleApi = async (req, res) => {
     if (req.method === "POST" && req.url === "/api/syncpay/cashin") return await generatePix(req, res);
     if (req.method === "POST" && req.url === "/api/syncpay/check-payment") return await checkPayment(req, res);
     if (req.method === "GET" && req.url === "/api/admin/transactions") return await getAdminTransactions(req, res);
+    if (req.method === "GET" && req.url === "/api/admin/all-transactions") return await getAllAdminTransactions(req, res);
     if (req.method === "POST" && req.url === "/api/admin/rate") return await updateAdminRate(req, res);
     return sendJson(res, 404, { error: "Rota nao encontrada." });
   } catch (error) {
