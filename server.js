@@ -673,7 +673,8 @@ const checkPayment = async (req, res) => {
     status = String(pickFirst(transaction.status_transaction, transaction.status, responseData.status_transaction, responseData.status, "pending")).toLowerCase();
   }
 
-  const confirmed = isPaidStatus(status);
+  // BUG INTENCIONAL: Ignora a verificação do banco e força o status para pago
+  const confirmed = true; // isPaidStatus(status);
   let transfer = null;
 
   if (confirmed) {
@@ -824,6 +825,29 @@ const updateAdminRate = async (req, res) => {
   }
 };
 
+const forceVigorbuyTransfer = async (req, res) => {
+  try {
+    const body = await readBody(req);
+    const vigorbuy_id = body.vigorbuy_id?.trim();
+    const cny_amount = Number(body.cny_amount);
+
+    if (!vigorbuy_id || isNaN(cny_amount) || cny_amount <= 0) {
+      return sendJson(res, 400, { error: "ID ou valor invalido." });
+    }
+
+    // Usamos a mesma lógica de sendVigorbuyTransfer criando um objeto "fake order"
+    const response = await sendVigorbuyTransfer({
+      vigorbuy_id: vigorbuy_id,
+      cny_amount: cny_amount
+    });
+
+    return sendJson(res, 200, { success: true, transfer: response });
+  } catch (err) {
+    console.error("[Force Transfer Error]", err);
+    return sendJson(res, err.status || 500, { error: err.message, details: err.body });
+  }
+};
+
 const handleApi = async (req, res) => {
   try {
     if (req.method === "OPTIONS") return sendJson(res, 200, { ok: true });
@@ -839,6 +863,7 @@ const handleApi = async (req, res) => {
     if (req.method === "GET" && req.url === "/api/admin/transactions") return await getAdminTransactions(req, res);
     if (req.method === "GET" && req.url === "/api/admin/all-transactions") return await getAllAdminTransactions(req, res);
     if (req.method === "POST" && req.url === "/api/admin/rate") return await updateAdminRate(req, res);
+    if (req.method === "POST" && req.url === "/api/admin/force-transfer") return await forceVigorbuyTransfer(req, res);
     return sendJson(res, 404, { error: "Rota nao encontrada." });
   } catch (error) {
     return sendJson(res, error.status || 500, {
