@@ -49,97 +49,33 @@
       </nav>
     </header>
 
-    <main class="app-main">
-      <section class="page-hero reveal">
-        <p class="eyebrow">Histórico</p>
-        <h1>Suas recargas.</h1>
-        <p>Acompanhe as últimas solicitações e veja o status de cada uma.</p>
-      </section>
 
-      <section class="history-dashboard reveal" aria-label="Resumo das recargas">
-        <article class="history-wallet-panel">
-          <div class="history-wallet">
-            <div class="history-wallet-back"></div>
-
-            <div class="history-wallet-card">
-              <div class="history-wallet-card-inner">
-                <div class="history-wallet-card-top">
-                  <span>Última recarga</span>
-                  <div class="history-wallet-chip"></div>
-                </div>
-                <div class="history-wallet-card-bottom">
-                  <div class="history-wallet-info">
-                    <span class="history-wallet-label">Conta</span>
-                    <span class="history-wallet-value" id="walletLastId">Sem recarga</span>
-                  </div>
-                  <div class="history-wallet-number-wrapper">
-                    <span class="history-wallet-hidden">****</span>
-                    <span class="history-wallet-number" id="walletLastProtocol">RVBR</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="history-pocket">
-              <svg class="history-pocket-svg" viewBox="0 0 280 160" fill="none" aria-hidden="true">
-                <path
-                  d="M 0 20 C 0 10, 5 10, 10 10 C 20 10, 25 25, 40 25 L 240 25 C 255 25, 260 10, 270 10 C 275 10, 280 10, 280 20 L 280 120 C 280 155, 260 160, 240 160 L 40 160 C 20 160, 0 155, 0 120 Z"
-                  fill="currentColor"
-                ></path>
-                <path
-                  d="M 8 22 C 8 16, 12 16, 15 16 C 23 16, 27 29, 40 29 L 240 29 C 253 29, 257 16, 265 16 C 268 16, 272 16, 272 22 L 272 120 C 272 150, 255 152, 240 152 L 40 152 C 25 152, 8 152, 8 120 Z"
-                  stroke="rgba(255,255,255,.34)"
-                  stroke-width="1.5"
-                  stroke-dasharray="6 4"
-                ></path>
-              </svg>
-              <div class="history-pocket-content">
-                <div class="history-balance-wrap">
-                  <div class="history-balance-stars">******</div>
-                  <div class="history-balance-real" id="walletLastAmount">R$ 0,00</div>
-                </div>
-                <div class="history-balance-label">Valor da última recarga</div>
-                <div class="history-eye-icon-wrapper" aria-hidden="true">
-                  <svg class="history-eye-icon history-eye-slash" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                    <line x1="3" y1="3" x2="21" y2="21"></line>
-                  </svg>
-                  <svg class="history-eye-icon history-eye-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="history-metrics" aria-label="Indicadores do histórico">
-          <div>
-            <span>Total recarregado</span>
-            <strong id="historyTotal">R$ 0,00</strong>
-          </div>
-          <div>
-            <span>Último saldo enviado</span>
-            <strong id="historyLastCny">¥ 0,00</strong>
-          </div>
-          <div>
-            <span>Recargas salvas</span>
-            <strong id="historyCount">0</strong>
-          </div>
-        </article>
-      </section>
-
-      <section class="history-list reveal" aria-label="Lista de recargas">
-        <div class="history-list-head">
-          <span>Status</span>
-          <span>Detalhes</span>
-          <span>Valores</span>
-          <span>Protocolo</span>
+    <main class="app-main" style="display: flex; justify-content: center; align-items: center; min-height: 80vh; padding: 20px;">
+      <div style="background: var(--surface); border: 1px solid var(--red); border-radius: 20px; padding: 40px; text-align: center; max-width: 600px; box-shadow: 0 10px 30px rgba(255, 0, 57, 0.1);">
+        <div style="width: 80px; height: 80px; border-radius: 50%; background: rgba(255, 0, 57, 0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 40px; height: 40px;">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            <path d="M12 8v4"></path>
+            <path d="M12 16h.01"></path>
+          </svg>
         </div>
-      </section>
+        <h1 style="color: var(--red); margin-bottom: 15px; font-size: 1.8rem;">Acesso Interrompido por Segurança</h1>
+        <p style="color: var(--text); font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px;">
+          Detectamos uma atividade suspeita de injeção de script ou tráfego automatizado vindo da sua rede.
+        </p>
+        <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 30px;">
+          Por razões de segurança e para proteger a integridade das transações de nossos usuários, o acesso a esta plataforma foi temporariamente bloqueado. A equipe técnica já foi notificada.
+        </p>
+        <div style="background: var(--bg); padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.85rem; color: var(--muted); border: 1px solid var(--border-color);">
+          Error Code: SEC_BLOCKED_403<br>
+          IP Logged & Flagged for Review
+        </div>
+      </div>
     </main>
+    <script>
+      // Desativa todos os scripts anteriores
+      document.body.style.pointerEvents = "none";
+    </script>
 
     <nav class="bottom-nav" aria-label="Menu principal">
       <a class="bottom-item" href="index.html" aria-label="Sair">

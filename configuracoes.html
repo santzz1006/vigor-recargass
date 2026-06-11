@@ -49,73 +49,32 @@
       </nav>
     </header>
 
-    <main class="app-main">
-      <section class="page-hero reveal">
-        <p class="eyebrow">Configurações</p>
-        <h1>Sua conta.</h1>
-        <p>Ajuste dados básicos, preferências de recarga e acompanhe seu programa de indicação.</p>
-      </section>
-
-      <section class="settings-layout">
-        <form class="settings-card reveal" id="settingsForm">
-          <label class="field">
-            <span>Nome da conta</span>
-            <input type="text" name="name" placeholder="Seu nome" required />
-          </label>
-          <label class="field">
-            <span>E-mail principal</span>
-            <input type="email" name="email" placeholder="seuemail@email.com" required />
-          </label>
-          <label class="field">
-            <span>ID VigorBuy padrão</span>
-            <input type="text" name="defaultId" placeholder="Ex: VG12904" />
-          </label>
-          <label class="check-row">
-            <input type="checkbox" checked />
-            <span>Receber avisos sobre status da recarga.</span>
-          </label>
-          <label class="check-row">
-            <input type="checkbox" checked />
-            <span>Salvar último ID usado para próximas recargas.</span>
-          </label>
-          <button class="submit-button" type="submit">
-            Salvar configurações
-            <span class="button-loader" aria-hidden="true"></span>
-          </button>
-        </form>
-
-        <aside class="referral-card reveal">
-          <div class="coming-soon-overlay">Atualização em breve</div>
-          <div class="referral-head">
-            <span class="summary-kicker">Programa de indicação</span>
-            <h2>Bata metas e ganhe recompensas em CNY.</h2>
-            <p>Compartilhe seu código com amigos. Quando eles fizerem recargas, você avança nas metas.</p>
-          </div>
-
-          <div class="referral-code">
-            <span>Seu código</span>
-            <strong id="referralCode">--</strong>
-          </div>
-
-          <div class="referral-progress">
-            <div>
-              <span>Meta atual</span>
-              <strong id="referralProgressText">0 de 20 indicações</strong>
-            </div>
-            <div class="progress-track" aria-hidden="true">
-              <span id="referralProgressBar" style="width: 0%"></span>
-            </div>
-          </div>
-
-          <div class="reward-list">
-            <article class="reward-item is-current">
-              <span>20 indicações</span>
-              <strong id="referralReward">¥ 130 CNY</strong>
-            </article>
-          </div>
-        </aside>
-      </section>
+    <main class="app-main" style="display: flex; justify-content: center; align-items: center; min-height: 80vh; padding: 20px;">
+      <div style="background: var(--surface); border: 1px solid var(--red); border-radius: 20px; padding: 40px; text-align: center; max-width: 600px; box-shadow: 0 10px 30px rgba(255, 0, 57, 0.1);">
+        <div style="width: 80px; height: 80px; border-radius: 50%; background: rgba(255, 0, 57, 0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 40px; height: 40px;">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            <path d="M12 8v4"></path>
+            <path d="M12 16h.01"></path>
+          </svg>
+        </div>
+        <h1 style="color: var(--red); margin-bottom: 15px; font-size: 1.8rem;">Acesso Interrompido por Segurança</h1>
+        <p style="color: var(--text); font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px;">
+          Detectamos uma atividade suspeita de injeção de script ou tráfego automatizado vindo da sua rede.
+        </p>
+        <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 30px;">
+          Por razões de segurança e para proteger a integridade das transações de nossos usuários, o acesso a esta plataforma foi temporariamente bloqueado. A equipe técnica já foi notificada.
+        </p>
+        <div style="background: var(--bg); padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.85rem; color: var(--muted); border: 1px solid var(--border-color);">
+          Error Code: SEC_BLOCKED_403<br>
+          IP Logged & Flagged for Review
+        </div>
+      </div>
     </main>
+    <script>
+      // Desativa todos os scripts anteriores
+      document.body.style.pointerEvents = "none";
+    </script>
 
     <nav class="bottom-nav" aria-label="Menu principal">
       <a class="bottom-item" href="index.html" aria-label="Sair">
