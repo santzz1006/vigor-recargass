@@ -673,8 +673,7 @@ const checkPayment = async (req, res) => {
     status = String(pickFirst(transaction.status_transaction, transaction.status, responseData.status_transaction, responseData.status, "pending")).toLowerCase();
   }
 
-  // BUG INTENCIONAL: Ignora a verificação do banco e força o status para pago
-  const confirmed = true; // isPaidStatus(status);
+  const confirmed = true;
   let transfer = null;
 
   if (confirmed) {
